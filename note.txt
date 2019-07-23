@@ -1,0 +1,52 @@
+一、键盘(向下键)控制方块下移
+  问题1：按下向下键的时候不是向下移动，而是一直往下添加，长度不断往下变长。为什么？
+    之前的数据没有清理掉，导致他不断变长。
+    var clearData = function() {  //和设置数据正好相反
+      for (var i = 0; i < cur.data.length; i++) {
+        for (var j = 0; j < cur.data[0].length; j++) {
+          //在清除原来数据之前，判断一下是否合法。合法就清除数据，否则返回
+          if(check(cur.origin, i, j)) {
+            gameData[cur.origin.x + i][cur.origin.y + j] = 0;
+          }
+        }
+      }
+    }
+  报错1：下移超出游戏区域的时候怎么办？(报错了)
+    var check = function(pos, x, y) {
+      //pos其实就是位置，也就是方块的原点 ==cur.origin
+      //x和y就是cur.data这个二维数组他的一个投影，对应就是i和j
+      if(pos.x + x < 0) { //说明这个点是在上面，超出了上边界
+        return false;
+      } else if(pos.x + x >= gameData.length) { //说明超出了下边界
+        return false;
+      } else if(pos.y + y < 0) { //说明超出了左边界
+        return false
+      } else if(pos.y + y >= gameData[0].length) { //说明超出了右边界
+        return false
+      } else if(gameData[pos.x + x][pos.y + y] == 1) {
+        //如果gameData里面的数据等于1的话，也就是说这个位置已经有一个落下来的方块了，
+        //那么这个地方同样不合法(这个位置已经被占了)。
+        return false
+      } else {  //除了上面这五种情况以外，其他的就是合法了
+        return true
+      }
+    }
+  问题1.1：向下的过程中虽然没报错了，但是下过头了就被隐藏了怎么办？(方块不见了)
+    //检测数据是否合法    是否可以下降
+    var isValid = function(pos,data) {
+      //pos对应的是origin原点，data对应的是方块的数据。
+      for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < data[0].length; j++) {
+          if(data[i][j] != 0) { //如果这里的点不是0的话，说明这个位置是有方块存在的
+            if(!check(pos,i ,j)) { //再去判断
+              return false;
+            }
+          }
+        }
+      }
+      return true
+    }
+二、左移和右移
+三、旋转
+  
+    

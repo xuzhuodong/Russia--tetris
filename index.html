@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>俄罗斯-方块</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game" id="game"></div>
+    <div class="next" id="next"></div>
+    <div class="info">
+        <div>已用时：<span id="time">0</span>s</div>
+        <div>以得分：<span id="score">0</span>分</div>
+        <div id="gameover"></div>
+    </div>
+
+    <script src="js/square.js"></script>
+    <script src="js/squareFactory.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/local.js"></script>
+    <script src="js/remote.js"></script>
+    <script src="js/script.js"></script>
+    <!-- local代表我有游戏中的的逻辑，remote.js代表的是对方游戏的逻辑。这两个模块都调用了game.js这个模块。
+    game.js就代表着整个游戏的核心，而它又去调用square.js这个模块，square.js就代表这一个方块，
+    又衍生出七种方块，代表着七种不同状态。（左移、右移、下落...） 
+
+    squareFactory.js主要生产方块的。 -->
+
+</body>
+</html>
